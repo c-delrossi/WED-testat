@@ -19,6 +19,7 @@ const backToStartBtn = document.querySelector('#back-to-start-btn');
 const switchConnectionBtn = document.querySelector('#switch-connection-btn');
 const playerNameInput = document.querySelector('#player-name-input');
 const handSelectorDiv = document.querySelector('#hand-selector-div');
+const pcHandDiv = document.querySelector('#computer-hand-div');
 const historyTable = document.querySelector('#history-table');
 const rankingList = document.querySelector('#ranking-list');
 
@@ -68,6 +69,7 @@ function updateHistory(playerHand, pcHand, didWin) {
 document.querySelectorAll('.hand-btn').forEach((x) => (x.addEventListener('click', (event) => {
     const playerHand = event.target.dataset.hand;
     const pcHand = pickHand();
+    pcHandDiv.textContent = pcHand;
     evaluateHand(playerName, playerHand, pcHand, updateHistory);
     })
 ));
