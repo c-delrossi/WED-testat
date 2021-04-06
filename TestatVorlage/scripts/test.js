@@ -1,7 +1,11 @@
 import {HANDS, isConnected, getRankings, evaluateHand, setConnected, addRanking} from './game-service.js';
 
 // TODO: Replace the following is demo code which should not be inclucec in the final solution
-
+const resultTable = {
+    0: '=',
+    '-1': '×',
+    1: '✓',
+};
 let winCount = 0;
 let playerName;
 
@@ -46,20 +50,11 @@ function updateRanking(rankings, scores) {
 }
 
 function updateHistory(playerHand, pcHand, didWin) {
-    let symbol;
-    switch (didWin) {
-        case 1:
-            winCount++;
-            symbol = '✓';
-            break;
-        case -1:
-            symbol = '×';
-            break;
-        default:
-            symbol = '=';
+    if (didWin === 1) {
+        winCount++;
     }
     const newRow = historyTable.insertRow();
-    newRow.innerHTML = `<td>${symbol}</td><tr><td>${playerHand}</td><td>${pcHand}</td></tr>`;
+    newRow.innerHTML = `<td>${resultTable[didWin]}</td><tr><td>${playerHand}</td><td>${pcHand}</td></tr>`;
 }
 
 document.querySelectorAll('.hand-btn').forEach((x) => (x.addEventListener('click', (event) => {
