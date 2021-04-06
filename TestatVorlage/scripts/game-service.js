@@ -3,6 +3,11 @@
 const DELAY_MS = 1000;
 const rankedScores = [];
 const rankings = {};
+const evaluationTable = {
+    rock: {rock: 0, paper: -1, scissors: 1},
+    paper: {rock: 1, paper: 0, scissors: -1},
+    scissors: {rock: -1, paper: 1, scissors: 0},
+};
 
 export const HANDS = ['scissors', 'rock', 'paper'];
 
@@ -40,37 +45,7 @@ export function addRanking(name, wins) {
 }
 
 function determineWinner(playerHand, pcHand) {
-    switch (playerHand) {
-        case 'scissors':
-            switch (pcHand) {
-                case 'paper':
-                    return 1;
-                case 'rock':
-                    return -1;
-                default:
-                    return 0;
-            }
-        case 'paper':
-            switch (pcHand) {
-                case 'rock':
-                    return 1;
-                case 'scissors':
-                    return -1;
-                default:
-                    return 0;
-            }
-        case 'rock':
-            switch (pcHand) {
-                case 'scissors':
-                    return 1;
-                case 'paper':
-                    return -1;
-                default:
-                    return 0;
-            }
-        default:
-            return 0;
-    }
+    return evaluationTable[playerHand][pcHand];
 }
 
 export function evaluateHand(playerName, playerHand, pcHand, didWinHandlerCallbackFn) {
