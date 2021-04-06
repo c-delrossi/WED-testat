@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Schere Stein Papier</title>
+  <!--  todo: use stylesheet styles/global.css; should make h1 blueviolet-->
+  <link rel="stylesheet" href="styles/test.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js"
+          integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU=" crossorigin="anonymous" defer></script>
+  <script src="scripts/test.js" type="module"></script>
+</head>
+<body>
+  <h1>Schere Stein Papier</h1>
+  <div id="start-page">
+    <button type="button" id="switch-connection-btn" class="start-page">Wechsle zu Server</button>
+
+    <figure class="start-page">
+      <figcaption><b>Rangliste</b></figcaption>
+      <ol id="ranking-list">
+      </ol>
+    </figure>
+
+    <div class="start-page">Starten Sie ein neues Spiel</div>
+    <label for="player-name-input" class="start-page">Name</label>
+    <input id="player-name-input" class="start-page">
+
+    <button type="button" id="start-game-btn" class="start-page">Spiel Starten</button>
+  </div>
+
+  <div id="game-page">
+    <div id="hand-selector-div" class="game-page"></div>
+
+    <button type="button" id="scissors-btn" class="hand-btn" data-hand="scissors">Schere</button>
+    <button type="button" id="rock-btn" class="hand-btn" data-hand="rock">Stein</button>
+    <button type="button" id="paper-btn" class="hand-btn" data-hand="paper">Papier</button>
+
+    <div class="game-page">VS</div>
+
+    <div id="computer-hand-div" class="game-page">?</div>
+
+    <button type="button" id="back-to-start-btn" class="game-page">Zurück zum Ranking</button>
+
+    <label id="history-label" for="history-table" class="game-page">History</label>
+    <table id="history-table" class="game-page">
+      <tbody>
+        <tr>
+          <th>Resultat</th>
+          <th>Spieler</th>
+          <th>Gegner</th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

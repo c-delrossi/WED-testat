@@ -1,0 +1,55 @@
+h1 {
+    color: blueviolet;
+}
+
+.start-page {
+    display: block;
+}
+
+.hand-btn {
+    display: inline-block;
+}
+
+.game-page {
+    display: block;
+}
+
+#computer-hand-div {
+    border: 1px solid black;
+    padding: 10px;
+    width: 50px;
+    height: 20px;
+}
+
+#history-label {
+    padding-left: 210px;
+}
+
+#history-table tr:nth-child(even) {
+    background-color: aliceblue;
+}
+
+#history-table tr:nth-child(odd) {
+    background-color: white;
+}
+
+ul {
+    list-style-type: none;
+}
+
+th {
+    padding: 15px 50px;
+}
+
+td {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+#game-page {
+    display: none;
+}
+
+#start-page {
+    display: block;
+}
