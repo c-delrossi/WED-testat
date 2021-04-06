@@ -1,18 +1,8 @@
 // markus suggestion
 
 const DELAY_MS = 1000;
-const rankedScores = [10, 2, 3, 4, 5, 6, 7, 8, 9];
-const rankings = {
-    A: {name: 'A', wins: 10},
-    B: {name: 'B', wins: 2},
-    C: {name: 'C', wins: 3},
-    D: {name: 'D', wins: 4},
-    E: {name: 'E', wins: 5},
-    F: {name: 'F', wins: 6},
-    G: {name: 'G', wins: 7},
-    H: {name: 'H', wins: 8},
-    I: {name: 'I', wins: 9},
-};
+const rankedScores = [];
+const rankings = {};
 
 export const HANDS = ['scissors', 'rock', 'paper'];
 
