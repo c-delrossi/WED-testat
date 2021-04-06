@@ -40,9 +40,9 @@ function createRank(score) {
 }
 
 function updateRanking(rankings, scores) {
+    rankingList.innerHTML = '';
     scores.forEach((score) => (createRank(score)));
     Object.keys(rankings).forEach((key) => (addPlayerToRankingList(rankings[key])));
-    console.log(rankingList.innerHtml);
     // rankingList.innerHTML = '';
     // ranking.sort((current, previous) => (previous.win - current.win));
     // ranking.forEach((entry) => addToRankingList(entry));
@@ -87,7 +87,6 @@ backToStartBtn.addEventListener(
     'click', () => {
         addRanking(playerName, winCount);
         getRankings(updateRanking);
-        //getRankings(updateRanking);
         document.querySelector('#game-page').style.display = 'none';
         document.querySelector('#start-page').style.display = 'block';
     },
