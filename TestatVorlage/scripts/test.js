@@ -2,10 +2,6 @@ import {HANDS, isConnected, getRankings, evaluateHand, setConnected, addRanking}
 
 // TODO: Replace the following is demo code which should not be inclucec in the final solution
 
-console.log('isConnected:', isConnected());
-
-getRankings((rankings) => console.log('rankings:', rankings));
-
 let winCount = 0;
 let playerName;
 
