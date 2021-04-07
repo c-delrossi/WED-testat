@@ -1,7 +1,6 @@
 // markus suggestion
 
 const DELAY_MS = 1000;
-const rankedScores = [];
 const rankings = {};
 const evaluationTable = {
     rock: {rock: 0, paper: -1, scissors: 1},

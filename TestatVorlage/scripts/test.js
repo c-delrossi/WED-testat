@@ -23,6 +23,14 @@ const pcHandDiv = document.querySelector('#computer-hand-div');
 const historyTable = document.querySelector('#history-table');
 const rankingList = document.querySelector('#ranking-list');
 
+function getTopScores(rankings) {
+    let scores = new Set();
+    Object.keys(rankings).forEach((key) => (scores.add(rankings[key].wins)));
+    scores = Array.from(scores);
+    scores.sort((current, previous) => (previous - current));
+    return scores.slice(0, 10);
+}
+
 function addPlayerToRankingList(entry) {
     const score = entry.wins;
     const listElement = document.createElement('li');
@@ -78,8 +86,6 @@ startGameBtn.addEventListener(
 
 backToStartBtn.addEventListener(
     'click', () => {
-        addRanking(playerName, winCount);
-        getRankings(updateRanking);
         document.querySelector('#game-page').style.display = 'none';
         document.querySelector('#start-page').style.display = 'block';
     },
