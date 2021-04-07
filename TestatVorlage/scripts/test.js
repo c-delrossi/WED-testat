@@ -55,7 +55,7 @@ function updateRanking(rankings) {
     rankingList.innerHTML = '';
     scores.forEach((score) => (createRank(score)));
     Object.keys(rankings).forEach((key) => {
-        if (scores.includes(rankings[key.wins])) {
+        if (scores.includes(rankings[key].wins)) {
             addPlayerToRankingList(rankings[key]);
         }
     });

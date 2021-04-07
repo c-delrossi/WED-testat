@@ -3,12 +3,12 @@
 const DELAY_MS = 1000;
 const rankings = {};
 const evaluationTable = {
-    rock: {rock: 0, paper: -1, scissors: 1},
-    paper: {rock: 1, paper: 0, scissors: -1},
-    scissors: {rock: -1, paper: 1, scissors: 0},
+    stein: {stein: 0, papier: -1, schere: 1},
+    papier: {stein: 1, papier: 0, schere: -1},
+    schere: {stein: -1, papier: 1, schere: 0},
 };
 
-export const HANDS = ['scissors', 'rock', 'paper'];
+export const HANDS = ['schere', 'stein', 'papier'];
 
 let isConnectedState = false;
 
