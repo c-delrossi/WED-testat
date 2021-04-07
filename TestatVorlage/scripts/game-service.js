@@ -21,25 +21,12 @@ export function isConnected() {
 }
 
 export function getRankings(rankingsCallbackHandlerFn) {
-    setTimeout(() => rankingsCallbackHandlerFn(rankings, rankedScores), DELAY_MS);
+    setTimeout(() => rankingsCallbackHandlerFn(rankings), DELAY_MS);
 }
 
-export function addRanking(name, wins) {
-    if (rankedScores.includes(wins)) {
+export function addRanking(rankedScores, name, wins) {
+    if (!(name in rankings) || (rankings[name].wins < wins)) {
         rankings[name] = {name, wins};
-    } else if (rankedScores.length < 10) {
-        rankings[name] = {name, wins};
-        rankedScores.push(wins);
-        rankedScores.sort((current, previous) => (previous - current));
-    } else if (rankedScores[9] < wins) {
-        Object.keys(rankings).forEach((x) => {
-            if (rankings[x].wins === rankedScores[9]) {
-                delete rankings[x];
-            }
-        });
-        rankedScores[9] = wins;
-        rankings[name] = {name, wins};
-        rankedScores.sort((current, previous) => (previous - current));
     }
 }
 

@@ -48,13 +48,17 @@ function createRank(score) {
     rankingList.append(listElement);
 }
 
-function updateRanking(rankings, scores) {
+function updateRanking(rankings) {
+    const oldScores = getTopScores(rankings);
+    addRanking(oldScores, playerName, winCount);
+    const scores = getTopScores(rankings);
     rankingList.innerHTML = '';
     scores.forEach((score) => (createRank(score)));
-    Object.keys(rankings).forEach((key) => (addPlayerToRankingList(rankings[key])));
-    // rankingList.innerHTML = '';
-    // ranking.sort((current, previous) => (previous.win - current.win));
-    // ranking.forEach((entry) => addToRankingList(entry));
+    Object.keys(rankings).forEach((key) => {
+        if (scores.includes(rankings[key.wins])) {
+            addPlayerToRankingList(rankings[key]);
+        }
+    });
 }
 
 function updateHistory(playerHand, pcHand, didWin) {
@@ -70,6 +74,7 @@ document.querySelectorAll('.hand-btn').forEach((x) => (x.addEventListener('click
     const pcHand = pickHand();
     pcHandDiv.textContent = pcHand;
     evaluateHand(playerName, playerHand, pcHand, updateHistory);
+    getRankings(updateRanking);
     })
 ));
 
@@ -81,6 +86,7 @@ startGameBtn.addEventListener(
         handSelectorDiv.innerHTML = `<b>${playerName}!</b> Wähle deine Hand!`;
         document.querySelector('#game-page').style.display = 'block';
         document.querySelector('#start-page').style.display = 'none';
+        getRankings(updateRanking);
     },
 );
 
