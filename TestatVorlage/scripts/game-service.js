@@ -38,5 +38,5 @@ export function evaluateHand(playerName, playerHand, pcHand, didWinHandlerCallba
     // todo: replace calculation of didWin and update rankings while doing so.
     // optional: in local-mode (isConnected == false) store rankings in the browser localStorage https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API
     const didWin = determineWinner(playerHand, pcHand);
-    setTimeout(didWinHandlerCallbackFn(playerHand, pcHand, didWin), DELAY_MS);
+    didWinHandlerCallbackFn(playerHand, pcHand, didWin);
 }
