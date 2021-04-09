@@ -102,8 +102,7 @@ button,
 figcaption,
 .start-page,
 #ranking-list,
-#switch-connection-btn,
-#history-label {
+#switch-connection-btn  {
     margin: auto;
 }
 
