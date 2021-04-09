@@ -36,7 +36,7 @@ const rankingList = document.querySelector('#ranking-list');
 const countdownDiv = document.querySelector('#countdown-div');
 
 function switchButtonState() {
-    document.querySelectorAll('Button').forEach((button) => (button.disabled=!button.disabled));
+    document.querySelectorAll('Button').forEach((button) => (button.disabled = !button.disabled));
 }
 
 function resetHandButtons() {
