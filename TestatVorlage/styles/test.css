@@ -40,15 +40,12 @@ hr {
     margin-left: 37.5%;
 }
 
-.hand-btn {
-    display: inline-block;
-}
-
 button {
     height: 40px;
 }
 
 .hand-btn {
+    display: inline-block;
     width: 8.33%;
     margin-top: 20px;
     margin-bottom: 30px;
@@ -102,7 +99,7 @@ button,
 figcaption,
 .start-page,
 #ranking-list,
-#switch-connection-btn  {
+#switch-connection-btn {
     margin: auto;
 }
 
