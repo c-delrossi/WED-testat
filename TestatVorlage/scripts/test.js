@@ -35,10 +35,18 @@ function switchButtonState() {
     document.querySelectorAll('Button').forEach((button) => (button.disabled=!button.disabled));
 }
 
+function resetHandButtons() {
+    document.querySelectorAll('.hand-btn').forEach((button) => {
+        button.style.color = 'black';
+        button.textContent = button.dataset.hand;
+    });
+}
+
 function countDown() {
     if (countdownLength === 0) {
         countdownDiv.textContent = 'VS';
         pcHandDiv.textContent = '?';
+        resetHandButtons();
         switchButtonState();
     } else {
         countdownDiv.textContent = `Nächste Runde in ${countdownLength}`;
@@ -100,11 +108,13 @@ function updateHistory(playerHand, pcHand, didWin) {
 }
 
 document.querySelectorAll('.hand-btn').forEach((x) => (x.addEventListener('click', (event) => {
-    startCountdown();
+    startCountdown(event);
     const playerHand = event.target.dataset.hand;
     const pcHand = pickHand();
     pcHandDiv.textContent = pcHand;
-    evaluateHand(playerName, playerHand, pcHand, updateHistory);
+    const didWin = evaluateHand(playerName, playerHand, pcHand, updateHistory);
+    event.target.textContent = `${resultTable[didWin]} ${event.target.dataset.hand}`;
+    event.target.style.color = colorTable[didWin];
     getRankings(updateRanking);
     })
 ));
