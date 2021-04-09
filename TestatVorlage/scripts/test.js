@@ -38,17 +38,17 @@ function getTopScores(rankings) {
 
 function addPlayerToRankingList(entry) {
     const score = entry.wins;
-    const listElement = document.createElement('li');
+    const listElement = document.createElement('div');
     listElement.textContent = entry.name;
     document.querySelector(`#list-score-${score}`).appendChild(listElement);
 }
 
-function createRank(score) {
-    const listElement = document.createElement('li');
-    const subList = document.createElement('ul');
+function createRank(score, rank) {
+    const listElement = document.createElement('div');
+    const subList = document.createElement('div');
     subList.dataset.score = score;
     subList.id = `list-score-${score}`;
-    listElement.textContent = ` Rang mit ${score} Siegen`;
+    listElement.innerHTML = `<b>${rank}. Rang mit ${score} Siegen</b>`;
     listElement.append(subList);
     rankingList.append(listElement);
 }
@@ -58,7 +58,7 @@ function updateRanking(rankings) {
     addRanking(oldScores, playerName, winCount);
     const scores = getTopScores(rankings);
     rankingList.innerHTML = '';
-    scores.forEach((score) => (createRank(score)));
+    scores.forEach((score, index) => (createRank(score, index + 1)));
     Object.keys(rankings).forEach((key) => {
         if (scores.includes(rankings[key].wins)) {
             addPlayerToRankingList(rankings[key]);
