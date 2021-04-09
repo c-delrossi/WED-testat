@@ -13,6 +13,8 @@ const colorTable = {
 };
 let winCount = 0;
 let playerName;
+let playerSequenceNumber = 1;
+let countdownLength;
 
 function pickHand() {
     const handIndex = Math.floor(Math.random() * 3);
@@ -85,9 +87,14 @@ document.querySelectorAll('.hand-btn').forEach((x) => (x.addEventListener('click
 
 startGameBtn.addEventListener(
     'click', () => {
+        pcHandDiv.textContent = '?';
         winCount = 0;
-        historyTable.innerHTML = '';
-        playerName = playerNameInput.value;
+        historyTable.innerHTML = '<tbody><tr><th>Resultat</th><th>Spieler</th><th>Gegner</th></tr></tbody>';
+        if (playerNameInput.value === '') {
+            playerName = `Spieler ${playerSequenceNumber++}`;
+        } else {
+            playerName = playerNameInput.value;
+        }
         handSelectorDiv.innerHTML = `<b>${playerName}!</b> Wähle deine Hand!`;
         document.querySelector('#game-page').style.display = 'block';
         document.querySelector('#start-page').style.display = 'none';
