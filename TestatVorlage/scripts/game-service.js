@@ -1,14 +1,20 @@
 // markus suggestion
 
 const DELAY_MS = 1000;
-const rankings = {};
+let rankings;
 const evaluationTable = {
-    stein: {stein: 0, papier: -1, schere: 1},
-    papier: {stein: 1, papier: 0, schere: -1},
-    schere: {stein: -1, papier: 1, schere: 0},
+    Stein: {Stein: 0, Papier: -1, Schere: 1},
+    Papier: {Stein: 1, Papier: 0, Schere: -1},
+    Schere: {Stein: -1, Papier: 1, Schere: 0},
 };
 
-export const HANDS = ['schere', 'stein', 'papier'];
+export const HANDS = ['Schere', 'Stein', 'Papier'];
+
+if (localStorage.getItem('rankings') === null) {
+    rankings = {};
+} else {
+    rankings = JSON.parse(localStorage.getItem('rankings'));
+}
 
 let isConnectedState = false;
 
@@ -24,9 +30,10 @@ export function getRankings(rankingsCallbackHandlerFn) {
     setTimeout(() => rankingsCallbackHandlerFn(rankings), DELAY_MS);
 }
 
-export function addRanking(rankedScores, name, wins) {
-    if (!(name in rankings) || (rankings[name].wins < wins)) {
-        rankings[name] = {name, wins};
+export function addRankingIfAbsent(name) {
+    if (!(name in rankings)) {
+        rankings[name] = {name, wins: 0};
+        localStorage.setItem('rankings', JSON.stringify(rankings));
     }
 }
 
@@ -38,5 +45,10 @@ export function evaluateHand(playerName, playerHand, pcHand, didWinHandlerCallba
     // todo: replace calculation of didWin and update rankings while doing so.
     // optional: in local-mode (isConnected == false) store rankings in the browser localStorage https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API
     const didWin = determineWinner(playerHand, pcHand);
+    if (didWin === 1) {
+        rankings[playerName].wins += 1;
+    }
     didWinHandlerCallbackFn(playerHand, pcHand, didWin);
+    localStorage.setItem('rankings', JSON.stringify(rankings));
+    return didWin;
 }

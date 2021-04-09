@@ -1,4 +1,4 @@
-import {HANDS, isConnected, getRankings, evaluateHand, setConnected, addRanking} from './game-service.js';
+import {HANDS, isConnected, getRankings, evaluateHand, setConnected, addRankingIfAbsent} from './game-service.js';
 
 // TODO: Replace the following is demo code which should not be inclucec in the final solution
 const resultTable = {
@@ -11,10 +11,15 @@ const colorTable = {
     1: 'green',
     '-1': 'red',
 };
-let winCount = 0;
 let playerName;
 let playerSequenceNumber = 1;
 let countdownLength;
+
+if (localStorage.getItem('playerSequenceNumber') === null) {
+    playerSequenceNumber = 1;
+} else {
+    playerSequenceNumber = localStorage.getItem('playerSequenceNumber');
+}
 
 function pickHand() {
     const handIndex = Math.floor(Math.random() * 3);
@@ -87,8 +92,6 @@ function createRank(score, rank) {
 }
 
 function updateRanking(rankings) {
-    const oldScores = getTopScores(rankings);
-    addRanking(oldScores, playerName, winCount);
     const scores = getTopScores(rankings);
     rankingList.innerHTML = '';
     scores.forEach((score, index) => (createRank(score, index + 1)));
@@ -99,10 +102,11 @@ function updateRanking(rankings) {
     });
 }
 
+if (localStorage.getItem('rankings') !== null) {
+    updateRanking(JSON.parse(localStorage.getItem('rankings')));
+}
+
 function updateHistory(playerHand, pcHand, didWin) {
-    if (didWin === 1) {
-        winCount++;
-    }
     const newRow = historyTable.insertRow();
     newRow.innerHTML = `<td style="color:${colorTable[didWin]}">${resultTable[didWin]}</td><tr><td>${playerHand}</td><td>${pcHand}</td></tr>`;
 }
@@ -122,13 +126,14 @@ document.querySelectorAll('.hand-btn').forEach((x) => (x.addEventListener('click
 startGameBtn.addEventListener(
     'click', () => {
         pcHandDiv.textContent = '?';
-        winCount = 0;
         historyTable.innerHTML = '<tbody><tr><th>Resultat</th><th>Spieler</th><th>Gegner</th></tr></tbody>';
         if (playerNameInput.value === '') {
             playerName = `Spieler ${playerSequenceNumber++}`;
+            localStorage.setItem('playerSequenceNumber', playerSequenceNumber);
         } else {
             playerName = playerNameInput.value;
         }
+        addRankingIfAbsent(playerName);
         handSelectorDiv.innerHTML = `<b>${playerName}!</b> Wähle deine Hand!`;
         document.querySelector('#game-page').style.display = 'block';
         document.querySelector('#start-page').style.display = 'none';
