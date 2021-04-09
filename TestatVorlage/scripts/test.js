@@ -1,6 +1,5 @@
 import {HANDS, isConnected, getRankings, evaluateHand, setConnected, addRankingIfAbsent} from './game-service.js';
 
-// TODO: Replace the following is demo code which should not be inclucec in the final solution
 const resultTable = {
     0: '=',
     '-1': '×',
