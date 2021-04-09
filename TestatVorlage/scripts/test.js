@@ -29,6 +29,28 @@ const handSelectorDiv = document.querySelector('#hand-selector-div');
 const pcHandDiv = document.querySelector('#computer-hand-div');
 const historyTable = document.querySelector('#history-table');
 const rankingList = document.querySelector('#ranking-list');
+const countdownDiv = document.querySelector('#countdown-div');
+
+function switchButtonState() {
+    document.querySelectorAll('Button').forEach((button) => (button.disabled=!button.disabled));
+}
+
+function countDown() {
+    if (countdownLength === 0) {
+        countdownDiv.textContent = 'VS';
+        switchButtonState();
+    } else {
+        countdownDiv.textContent = `Nächste Runde in ${countdownLength}`;
+        countdownLength--;
+        setTimeout(countDown, 1000);
+    }
+}
+
+function startCountdown() {
+    switchButtonState();
+    countdownLength = 3;
+    countDown(countDown);
+}
 
 function getTopScores(rankings) {
     let scores = new Set();
@@ -77,6 +99,7 @@ function updateHistory(playerHand, pcHand, didWin) {
 }
 
 document.querySelectorAll('.hand-btn').forEach((x) => (x.addEventListener('click', (event) => {
+    startCountdown();
     const playerHand = event.target.dataset.hand;
     const pcHand = pickHand();
     pcHandDiv.textContent = pcHand;
