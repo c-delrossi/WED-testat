@@ -2,9 +2,8 @@ h1 {
     color: blueviolet;
 }
 
-h2,
-#ranking-list {
-    text-align: center;
+button {
+    height: 40px;
 }
 
 hr {
@@ -16,12 +15,43 @@ hr {
     margin-bottom: 20px;
 }
 
-.start-page {
+th {
+    padding: 15px 50px;
+}
+
+td {
+    text-align: center;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+div,
+button,
+.start-page,
+#ranking-list,
+#history-table,
+#switch-connection-btn {
+    margin: auto;
+}
+
+h2,
+th,
+#game-page,
+#ranking-list {
+    text-align: center;
+}
+
+.start-page,
+.game-page,
+#start-page {
     display: block;
 }
 
-#back-to-start-btn {
-    margin-left: 37.5%;
+.hand-btn {
+    display: inline-block;
+    width: 8.33%;
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 #name-label {
@@ -35,20 +65,10 @@ hr {
     display: inline-block;
 }
 
-#start-game-message {
+#start-game-message,
+#back-to-start-btn {
     display: flex;
     margin-left: 37.5%;
-}
-
-button {
-    height: 40px;
-}
-
-.hand-btn {
-    display: inline-block;
-    width: 8.33%;
-    margin-top: 20px;
-    margin-bottom: 30px;
 }
 
 #switch-connection-btn {
@@ -58,11 +78,6 @@ button {
 
 #history-table {
     display: table;
-    margin: auto;
-}
-
-.game-page {
-    display: block;
 }
 
 #computer-hand-div {
@@ -82,33 +97,7 @@ button {
     background-color: white;
 }
 
-th {
-    padding: 15px 50px;
-    text-align: center;
-}
-
-td {
-    text-align: center;
-    padding-left: 50px;
-    padding-right: 50px;
-}
-
-div,
-figure,
-button,
-figcaption,
-.start-page,
-#ranking-list,
-#switch-connection-btn {
-    margin: auto;
-}
-
 #game-page {
-    text-align: center;
     align-content: center;
     display: none;
-}
-
-#start-page {
-    display: block;
 }
