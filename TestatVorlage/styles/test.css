@@ -57,10 +57,10 @@ th,
 #name-label {
     margin-top: 10px;
     margin-bottom: 20px;
-    display: inline-block;
     margin-left: 37.5%;
 }
 
+#name-label,
 #player-name-input {
     display: inline-block;
 }
