@@ -38,6 +38,7 @@ function switchButtonState() {
 function countDown() {
     if (countdownLength === 0) {
         countdownDiv.textContent = 'VS';
+        pcHandDiv.textContent = '?';
         switchButtonState();
     } else {
         countdownDiv.textContent = `Nächste Runde in ${countdownLength}`;
