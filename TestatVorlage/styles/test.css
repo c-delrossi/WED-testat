@@ -2,12 +2,66 @@ h1 {
     color: blueviolet;
 }
 
+h2,
+#ranking-list {
+    text-align: center;
+}
+
+hr {
+    border-width: 0;
+    height: 1px;
+    background-color: black;
+    width: 25%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 .start-page {
     display: block;
 }
 
+#back-to-start-btn {
+    margin-left: 37.5%;
+}
+
+#name-label {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: inline-block;
+    margin-left: 37.5%;
+}
+
+#player-name-input {
+    display: inline-block;
+}
+
+#start-game-message {
+    display: flex;
+    margin-left: 37.5%;
+}
+
 .hand-btn {
     display: inline-block;
+}
+
+button {
+    height: 40px;
+}
+
+.hand-btn {
+    width: 8.33%;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+#switch-connection-btn {
+    width: 25%;
+    height: 50px;
+}
+
+#history-table {
+    display: table;
+    margin: auto;
 }
 
 .game-page {
@@ -15,14 +69,12 @@ h1 {
 }
 
 #computer-hand-div {
+    margin-top: 20px;
+    margin-bottom: 20px;
     border: 1px solid black;
     padding: 10px;
-    width: 50px;
+    width: 7%;
     height: 20px;
-}
-
-#history-label {
-    padding-left: 210px;
 }
 
 #history-table tr:nth-child(even) {
@@ -33,20 +85,31 @@ h1 {
     background-color: white;
 }
 
-ul {
-    list-style-type: none;
-}
-
 th {
     padding: 15px 50px;
+    text-align: center;
 }
 
 td {
+    text-align: center;
     padding-left: 50px;
     padding-right: 50px;
 }
 
+div,
+figure,
+button,
+figcaption,
+.start-page,
+#ranking-list,
+#switch-connection-btn,
+#history-label {
+    margin: auto;
+}
+
 #game-page {
+    text-align: center;
+    align-content: center;
     display: none;
 }
 
