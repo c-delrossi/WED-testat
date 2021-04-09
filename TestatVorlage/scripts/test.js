@@ -7,9 +7,9 @@ const resultTable = {
     1: '✓',
 };
 const colorTable = {
-    0: 'style="color:black"',
-    1: 'style="color:green"',
-    '-1': 'style="color:red"',
+    0: 'black',
+    1: 'green',
+    '-1': 'red',
 };
 let winCount = 0;
 let playerName;
@@ -96,7 +96,7 @@ function updateHistory(playerHand, pcHand, didWin) {
         winCount++;
     }
     const newRow = historyTable.insertRow();
-    newRow.innerHTML = `<td ${colorTable[didWin]}>${resultTable[didWin]}</td><tr><td>${playerHand}</td><td>${pcHand}</td></tr>`;
+    newRow.innerHTML = `<td style="color:${colorTable[didWin]}">${resultTable[didWin]}</td><tr><td>${playerHand}</td><td>${pcHand}</td></tr>`;
 }
 
 document.querySelectorAll('.hand-btn').forEach((x) => (x.addEventListener('click', (event) => {
