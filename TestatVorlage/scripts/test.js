@@ -110,14 +110,18 @@ function updateHistory(playerHand, pcHand, didWin) {
     newRow.innerHTML = `<td style="color:${colorTable[didWin]}">${resultTable[didWin]}</td><tr><td>${playerHand}</td><td>${pcHand}</td></tr>`;
 }
 
+function adjustButtonColorAndText(event, didWin) {
+    event.target.textContent = `${resultTable[didWin]} ${event.target.dataset.hand}`;
+    event.target.style.color = colorTable[didWin];
+}
+
 document.querySelectorAll('.hand-btn').forEach((x) => (x.addEventListener('click', (event) => {
     startCountdown(event);
     const playerHand = event.target.dataset.hand;
     const pcHand = pickHand();
     pcHandDiv.textContent = pcHand;
     const didWin = evaluateHand(playerName, playerHand, pcHand, updateHistory);
-    event.target.textContent = `${resultTable[didWin]} ${event.target.dataset.hand}`;
-    event.target.style.color = colorTable[didWin];
+    adjustButtonColorAndText(event, didWin);
     getRankings(updateRanking);
     })
 ));
@@ -128,6 +132,7 @@ startGameBtn.addEventListener(
         historyTable.innerHTML = '<tbody><tr><th>Resultat</th><th>Spieler</th><th>Gegner</th></tr></tbody>';
         if (playerNameInput.value === '') {
             playerName = `Spieler ${playerSequenceNumber++}`;
+            playerNameInput.value = playerName;
             localStorage.setItem('playerSequenceNumber', playerSequenceNumber);
         } else {
             playerName = playerNameInput.value;
