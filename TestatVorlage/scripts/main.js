@@ -34,13 +34,17 @@ const pcHandDiv = document.querySelector('#computer-hand-div');
 const historyTable = document.querySelector('#history-table');
 const rankingList = document.querySelector('#ranking-list');
 const countdownDiv = document.querySelector('#countdown-div');
+const gamePageDiv = document.querySelector('#game-page');
+const startPageDiv = document.querySelector('#start-page');
+const handButtons = document.querySelectorAll('.hand-btn');
+const buttons = document.querySelectorAll('button');
 
 function switchButtonState() {
-    document.querySelectorAll('Button').forEach((button) => (button.disabled = !button.disabled));
+    buttons.forEach((button) => (button.disabled = !button.disabled));
 }
 
 function resetHandButtons() {
-    document.querySelectorAll('.hand-btn').forEach((button) => {
+    handButtons.forEach((button) => {
         button.style.color = 'black';
         button.textContent = button.dataset.hand;
     });
@@ -115,7 +119,7 @@ function adjustButtonColorAndText(event, didWin) {
     event.target.style.color = colorTable[didWin];
 }
 
-document.querySelectorAll('.hand-btn').forEach((x) => (x.addEventListener('click', (event) => {
+handButtons.forEach((x) => (x.addEventListener('click', (event) => {
         startCountdown(event);
         const playerHand = event.target.dataset.hand;
         const pcHand = pickHand();
@@ -139,16 +143,16 @@ startGameBtn.addEventListener(
         }
         addRankingIfAbsent(playerName);
         handSelectorDiv.innerHTML = `<b>${playerName}!</b> Wähle deine Hand!`;
-        document.querySelector('#game-page').style.display = 'block';
-        document.querySelector('#start-page').style.display = 'none';
+        gamePageDiv.style.display = 'block';
+        startPageDiv.style.display = 'none';
         getRankings(updateRanking);
     },
 );
 
 backToStartBtn.addEventListener(
     'click', () => {
-        document.querySelector('#game-page').style.display = 'none';
-        document.querySelector('#start-page').style.display = 'block';
+        gamePageDiv.style.display = 'none';
+        startPageDiv.style.display = 'block';
     },
 );
 
