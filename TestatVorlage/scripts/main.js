@@ -56,7 +56,7 @@ function countDown() {
 function startCountdown() {
     switchButtonState();
     countdownLength = 3;
-    countDown(countDown);
+    countDown();
 }
 
 function getRankedScores(rankings) {
