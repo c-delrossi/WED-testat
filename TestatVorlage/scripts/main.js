@@ -11,21 +11,14 @@ const colorTable = {
     '-1': 'red',
 };
 let playerName;
-let playerSequenceNumber = 1;
 let countdownLength;
 
-if (localStorage.getItem('playerSequenceNumber') === null) {
-    playerSequenceNumber = 1;
-} else {
-    playerSequenceNumber = localStorage.getItem('playerSequenceNumber');
-}
 
 function pickHand() {
     const handIndex = Math.floor(Math.random() * 3);
     return HANDS[handIndex];
 }
 
-const startGameBtn = document.querySelector('#start-game-btn');
 const backToStartBtn = document.querySelector('#back-to-start-btn');
 const switchConnectionBtn = document.querySelector('#switch-connection-btn');
 const playerNameInput = document.querySelector('#player-name-input');
@@ -38,6 +31,7 @@ const gamePageDiv = document.querySelector('#game-page');
 const startPageDiv = document.querySelector('#start-page');
 const handButtons = document.querySelectorAll('.hand-btn');
 const buttons = document.querySelectorAll('button');
+const startGameForm = document.querySelector('#start-game-form');
 
 function switchButtonState() {
     buttons.forEach((button) => (button.disabled = !button.disabled));
@@ -130,17 +124,12 @@ handButtons.forEach((x) => (x.addEventListener('click', (event) => {
     })
 ));
 
-startGameBtn.addEventListener(
-    'click', () => {
+startGameForm.addEventListener(
+    'submit', (event) => {
+        event.preventDefault();
         pcHandDiv.textContent = '?';
         historyTable.innerHTML = '<tbody><tr><th>Resultat</th><th>Spieler</th><th>Gegner</th></tr></tbody>';
-        if (playerNameInput.value === '') {
-            playerName = `Spieler ${playerSequenceNumber++}`;
-            playerNameInput.value = playerName;
-            localStorage.setItem('playerSequenceNumber', playerSequenceNumber);
-        } else {
-            playerName = playerNameInput.value;
-        }
+        playerName = playerNameInput.value;
         addRankingIfAbsent(playerName);
         handSelectorDiv.innerHTML = `<b>${playerName}!</b> Wähle deine Hand!`;
         gamePageDiv.style.display = 'block';
