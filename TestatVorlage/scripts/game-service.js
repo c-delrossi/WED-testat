@@ -37,18 +37,22 @@ export function addRankingIfAbsent(name) {
     }
 }
 
+function pickHand() {
+    const handIndex = Math.floor(Math.random() * 3);
+    return HANDS[handIndex];
+}
+
 function determineWinner(playerHand, pcHand) {
     return evaluationTable[playerHand][pcHand];
 }
 
-export function evaluateHand(playerName, playerHand, pcHand, didWinHandlerCallbackFn) {
-    // todo: replace calculation of didWin and update rankings while doing so.
-    // optional: in local-mode (isConnected == false) store rankings in the browser localStorage https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API
+export function evaluateHand(playerName, playerHand, event, didWinHandlerCallbackFn) {
+    const pcHand = pickHand();
     const didWin = determineWinner(playerHand, pcHand);
     if (didWin === 1) {
         rankings[playerName].wins += 1;
     }
-    didWinHandlerCallbackFn(playerHand, pcHand, didWin);
+    didWinHandlerCallbackFn(playerHand, pcHand, didWin, event);
     localStorage.setItem('rankings', JSON.stringify(rankings));
     return didWin;
 }
