@@ -65,7 +65,7 @@ function startCountdown() {
     countDown(countDown);
 }
 
-function getTopScores(rankings) {
+function getRankedScores(rankings) {
     let scores = new Set();
     Object.keys(rankings).forEach((key) => (scores.add(rankings[key].wins)));
     scores = Array.from(scores);
@@ -83,11 +83,11 @@ function createRank(score, rank) {
 }
 
 function updateRanking(rankings) {
-    const scores = getTopScores(rankings);
+    const rankedScores = getRankedScores(rankings);
     rankingList.innerHTML = '';
-    scores.forEach((score, index) => (createRank(score, index + 1)));
+    rankedScores.forEach((score, index) => (createRank(score, index + 1)));
     Object.keys(rankings).forEach((key) => {
-        if (scores.includes(rankings[key].wins)) {
+        if (rankedScores.includes(rankings[key].wins)) {
             addPlayerToRankingList(rankings[key]);
         }
     });
