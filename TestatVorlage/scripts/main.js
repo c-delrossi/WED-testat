@@ -17,7 +17,7 @@ const playerNameInput = document.querySelector('#player-name-input');
 const handSelectorDiv = document.querySelector('#hand-selector-div');
 const pcHandDiv = document.querySelector('#computer-hand-div');
 const historyTable = document.querySelector('#history-table');
-const rankingList = document.querySelector('#ranking-list');
+const rankingDiv = document.querySelector('#ranking-div');
 const countdownDiv = document.querySelector('#countdown-div');
 const gamePageDiv = document.querySelector('#game-page');
 const startPageDiv = document.querySelector('#start-page');
@@ -69,12 +69,12 @@ function addPlayerToRankingList(entry) {
 }
 
 function createRank(score, rank) {
-    rankingList.innerHTML += `<b>${rank}. Rang mit ${score} Siegen</b><div id="list-score-${score}"></div>`;
+    rankingDiv.innerHTML += `<b>${rank}. Rang mit ${score} Siegen</b><div id="list-score-${score}"></div>`;
 }
 
 function updateRanking(rankings) {
     const rankedScores = getRankedScores(rankings);
-    rankingList.innerHTML = '';
+    rankingDiv.innerHTML = '';
     rankedScores.forEach((score, index) => (createRank(score, index + 1)));
     Object.keys(rankings).forEach((key) => {
         if (rankedScores.includes(rankings[key].wins)) {
