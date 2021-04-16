@@ -34,7 +34,9 @@ const buttons = document.querySelectorAll('button');
 const startGameForm = document.querySelector('#start-game-form');
 
 function switchButtonState() {
-    buttons.forEach((button) => (button.disabled = !button.disabled));
+    buttons.forEach((button) => {
+        button.disabled = !button.disabled;
+    });
 }
 
 function resetHandButtons() {
