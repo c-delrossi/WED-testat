@@ -1,5 +1,3 @@
-// markus suggestion
-
 const DELAY_MS = 1000;
 let rankings;
 const evaluationTable = {
