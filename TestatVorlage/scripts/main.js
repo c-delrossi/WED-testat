@@ -1,4 +1,4 @@
-import {HANDS, isConnected, getRankings, evaluateHand, setConnected, addRankingIfAbsent} from './game-service.js';
+import {isConnected, getRankings, evaluateHand, setConnected, addRankingIfAbsent} from './game-service.js';
 
 const resultTable = {
     0: '=',

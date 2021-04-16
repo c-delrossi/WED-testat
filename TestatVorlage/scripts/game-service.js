@@ -8,7 +8,7 @@ const evaluationTable = {
     Schere: {Stein: -1, Papier: 1, Schere: 0},
 };
 
-export const HANDS = ['Schere', 'Stein', 'Papier'];
+const HANDS = ['Schere', 'Stein', 'Papier'];
 
 if (localStorage.getItem('rankings') === null) {
     rankings = {};
