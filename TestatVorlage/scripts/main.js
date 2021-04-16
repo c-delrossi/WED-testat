@@ -10,8 +10,6 @@ const colorTable = {
     1: 'green',
     '-1': 'red',
 };
-let playerName;
-let countdownLength;
 
 const backToStartBtn = document.querySelector('#back-to-start-btn');
 const switchConnectionBtn = document.querySelector('#switch-connection-btn');
@@ -40,23 +38,21 @@ function resetHandButtons() {
     });
 }
 
-function countDown() {
-    if (countdownLength === 0) {
+function countDown(remainingTime) {
+    if (remainingTime === 0) {
         countdownDiv.textContent = 'VS';
         pcHandDiv.textContent = '?';
         resetHandButtons();
         switchButtonState();
     } else {
-        countdownDiv.textContent = `Nächste Runde in ${countdownLength}`;
-        countdownLength--;
-        setTimeout(countDown, 1000);
+        countdownDiv.textContent = `Nächste Runde in ${remainingTime}`;
+        setTimeout(() => countDown(remainingTime - 1), 1000);
     }
 }
 
 function startCountdown() {
     switchButtonState();
-    countdownLength = 3;
-    countDown();
+    countDown(3);
 }
 
 function getRankedScores(rankings) {
@@ -106,7 +102,7 @@ function updateGameView(playerHand, pcHand, didWin, event) {
 handButtons.forEach((x) => (x.addEventListener('click', (event) => {
         startCountdown(event);
         const playerHand = event.target.dataset.hand;
-        evaluateHand(playerName, playerHand, event, updateGameView);
+        evaluateHand(playerNameInput.value, playerHand, event, updateGameView);
         getRankings(updateRanking);
     })
 ));
@@ -116,7 +112,7 @@ startGameForm.addEventListener(
         event.preventDefault();
         pcHandDiv.textContent = '?';
         historyTable.innerHTML = '<tbody><tr><th>Resultat</th><th>Spieler</th><th>Gegner</th></tr></tbody>';
-        playerName = playerNameInput.value;
+        const playerName = playerNameInput.value;
         addRankingIfAbsent(playerName);
         handSelectorDiv.innerHTML = `<b>${playerName}!</b> Wähle deine Hand!`;
         gamePageDiv.style.display = 'block';
