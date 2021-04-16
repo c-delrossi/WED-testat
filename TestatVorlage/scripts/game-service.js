@@ -54,5 +54,4 @@ export function evaluateHand(playerName, playerHand, event, didWinHandlerCallbac
     }
     didWinHandlerCallbackFn(playerHand, pcHand, didWin, event);
     localStorage.setItem('rankings', JSON.stringify(rankings));
-    return didWin;
 }
