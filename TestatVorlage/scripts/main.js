@@ -131,6 +131,7 @@ backToStartBtn.addEventListener(
 switchConnectionBtn.addEventListener(
     'click', () => {
         setConnected(!isConnected());
+        getRankings(updateRanking);
         if (isConnected()) {
             switchConnectionBtn.textContent = 'Wechsle zu Lokal';
         } else {
