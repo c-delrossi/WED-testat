@@ -1,4 +1,6 @@
 const DELAY_MS = 1000;
+const SERVER_URL = 'https://stone.dev.ifs.hsr.ch';
+
 let rankings;
 const evaluationTable = {
     Stein: {Stein: 0, Papier: -1, Schere: 1},
