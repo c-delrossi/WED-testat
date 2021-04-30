@@ -30,9 +30,9 @@ export function getRankings(rankingsCallbackHandlerFn) {
     setTimeout(() => rankingsCallbackHandlerFn(rankings), DELAY_MS);
 }
 
-export function addRankingIfAbsent(name) {
-    if (!(name in rankings)) {
-        rankings[name] = {name, wins: 0};
+export function addRankingIfAbsent(user) {
+    if (!(user in rankings)) {
+        rankings[user] = {user, win: 0};
         localStorage.setItem('rankings', JSON.stringify(rankings));
     }
 }

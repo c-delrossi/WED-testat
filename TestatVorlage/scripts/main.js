@@ -64,8 +64,8 @@ function getRankedScores(rankings) {
 }
 
 function addPlayerToRankingList(entry) {
-    const score = entry.wins;
-    document.querySelector(`#list-score-${score}`).innerHTML += `<div>${entry.name}</div>`;
+    const score = entry.win;
+    document.querySelector(`#list-score-${score}`).innerHTML += `<div>${entry.user}</div>`;
 }
 
 function createRank(score, rank) {
