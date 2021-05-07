@@ -16,6 +16,9 @@ const colorTable = {
     '-1': 'red',
 };
 
+let loadingIndicatorIntervalId;
+let numberOfDots = 0;
+
 const backToStartBtn = document.querySelector('#back-to-start-btn');
 const switchConnectionBtn = document.querySelector('#switch-connection-btn');
 const playerNameInput = document.querySelector('#player-name-input');
@@ -29,6 +32,37 @@ const startPageDiv = document.querySelector('#start-page');
 const handButtons = document.querySelectorAll('.hand-btn');
 const buttons = document.querySelectorAll('button');
 const startGameForm = document.querySelector('#start-game-form');
+const loadingIndicator = document.querySelector('#loading-div');
+
+function disableSwitchConnectionButton() {
+    switchConnectionBtn.disabled = true;
+}
+
+function enableSwitchConnectionButton() {
+    switchConnectionBtn.disabled = false;
+}
+
+function updateLoadingIndicator() {
+    loadingIndicator.innerHTML = `<b>Lädt${'.'.repeat(numberOfDots++ % 4)}</b>`;
+}
+
+function animateLoadingIndicator() {
+    loadingIndicatorIntervalId = setInterval(updateLoadingIndicator, 250);
+}
+
+function startLoadingIndicator() {
+    numberOfDots = 0;
+    updateLoadingIndicator();
+    animateLoadingIndicator();
+    loadingIndicator.style.display = 'block';
+    rankingDiv.style.display = 'none';
+}
+
+function removeLoadingIndicator() {
+    loadingIndicator.style.display = 'none';
+    clearInterval(loadingIndicatorIntervalId);
+    rankingDiv.style.display = 'block';
+}
 
 function switchButtonState() {
     buttons.forEach((button) => {
@@ -85,7 +119,8 @@ function createRank(score, rank) {
 
 function updateRanking(rankings) {
     if (isConnected()) {
-        console.log(rankings);
+        removeLoadingIndicator();
+        enableSwitchConnectionButton();
     }
     const rankedScores = getRankedScores(rankings);
     rankingDiv.innerHTML = '';
@@ -155,8 +190,11 @@ switchConnectionBtn.addEventListener(
         setConnected(!isConnected());
         getRankings(updateRanking);
         if (isConnected()) {
+            disableSwitchConnectionButton();
+            startLoadingIndicator();
             switchConnectionBtn.textContent = 'Wechsle zu Lokal';
         } else {
+            removeLoadingIndicator();
             switchConnectionBtn.textContent = 'Wechsle zu Server';
         }
     },

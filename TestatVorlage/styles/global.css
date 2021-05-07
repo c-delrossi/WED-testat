@@ -28,8 +28,6 @@ td {
 div,
 button,
 .start-page,
-#loading-div,
-#ranking-list,
 #history-table,
 #switch-connection-btn {
     margin: auto;
@@ -38,7 +36,6 @@ button,
 h2,
 th,
 #game-page,
-#loading-div,
 #ranking-div {
     text-align: center;
 }
@@ -106,4 +103,5 @@ th,
 
 #loading-div {
     display: none;
+    margin-left: 49%;
 }
