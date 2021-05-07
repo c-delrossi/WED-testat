@@ -34,14 +34,17 @@ const startPageDiv = document.querySelector('#start-page');
 const handButtons = document.querySelectorAll('.hand-btn');
 const buttons = document.querySelectorAll('button');
 const startGameForm = document.querySelector('#start-game-form');
+const startGameBtn = document.querySelector('#start-game-btn');
 const loadingIndicator = document.querySelector('#loading-div');
 
-function disableSwitchConnectionButton() {
+function disableStartPageButtons() {
     switchConnectionBtn.disabled = true;
+    startGameBtn.disabled = true;
 }
 
-function enableSwitchConnectionButton() {
+function enableStartPageButtons() {
     switchConnectionBtn.disabled = false;
+    startGameBtn.disabled = false;
 }
 
 function updateLoadingIndicator() {
@@ -121,7 +124,7 @@ function createRank(score, rank) {
 function updateRanking(rankings) {
     if (isConnected()) {
         removeLoadingIndicator();
-        enableSwitchConnectionButton();
+        enableStartPageButtons();
     }
     const rankedScores = getRankedScores(rankings);
     rankingDiv.innerHTML = '';
@@ -192,7 +195,7 @@ switchConnectionBtn.addEventListener(
         setConnected(!isConnected());
         getRankings(updateRanking);
         if (isConnected()) {
-            disableSwitchConnectionButton();
+            disableStartPageButtons();
             startLoadingIndicator();
             switchConnectionBtn.textContent = 'Wechsle zu Lokal';
         } else {
