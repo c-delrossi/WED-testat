@@ -152,7 +152,7 @@ function updateGameView(playerHand, pcHand, didWin) {
     adjustButtonColorAndText(didWinTranslated);
     pcHandDiv.textContent = pcHand;
     const newRow = historyTable.insertRow();
-    newRow.innerHTML = `<td style="color:${colorTable[didWinTranslated]}">${resultTable[didWin]}</td><tr><td>${playerHand}</td><td>${pcHand}</td></tr>`;
+    newRow.innerHTML = `<td style="color:${colorTable[didWinTranslated]}">${resultTable[didWinTranslated]}</td><tr><td>${playerHand}</td><td>${pcHand}</td></tr>`;
 }
 
 handButtons.forEach((x) => (x.addEventListener('click', (event) => {
