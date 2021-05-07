@@ -102,14 +102,13 @@ function getRankedScores(rankings) {
     return scores.slice(0, 10);
 }
 
-function sanitize(name, maxlength = 10) {
-    return name.substring(0, maxlength)
-        .replace(/\W+/g, '');
+function sanitizeName(name, maxlength = 10) {
+    return name.replace(/\W+/g, '').substring(0, maxlength);
 }
 
 function addPlayerToRankingList(entry) {
     const score = entry.win;
-    const sanitizedName = sanitize(entry.user);
+    const sanitizedName = sanitizeName(entry.user);
     document.querySelector(`#list-score-${score}`).innerHTML += `<div>${sanitizedName}</div>`;
 }
 
