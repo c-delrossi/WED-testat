@@ -28,6 +28,7 @@ td {
 div,
 button,
 .start-page,
+#loading-div,
 #ranking-list,
 #history-table,
 #switch-connection-btn {
@@ -37,6 +38,7 @@ button,
 h2,
 th,
 #game-page,
+#loading-div,
 #ranking-div {
     text-align: center;
 }
@@ -99,5 +101,9 @@ th,
 
 #game-page {
     align-content: center;
+    display: none;
+}
+
+#loading-div {
     display: none;
 }
