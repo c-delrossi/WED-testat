@@ -1,5 +1,10 @@
 import {isConnected, getRankings, evaluateHand, setConnected, addRankingIfAbsent} from './game-service.js';
 
+const didWinTranslation = {
+    true: 1,
+    undefined: 0,
+    false: -1,
+};
 const resultTable = {
     0: '=',
     '-1': '×',
@@ -57,15 +62,21 @@ function startCountdown() {
 
 function getRankedScores(rankings) {
     let scores = new Set();
-    Object.keys(rankings).forEach((key) => (scores.add(rankings[key].wins)));
+    Object.keys(rankings).forEach((key) => (scores.add(rankings[key].win)));
     scores = Array.from(scores);
     scores.sort((current, previous) => (previous - current));
     return scores.slice(0, 10);
 }
 
+function sanitize(name, maxlength = 10) {
+    return name.substring(0, maxlength)
+        .replace(/\W+/g, '');
+}
+
 function addPlayerToRankingList(entry) {
     const score = entry.win;
-    document.querySelector(`#list-score-${score}`).innerHTML += `<div>${entry.user}</div>`;
+    const sanitizedName = sanitize(entry.user);
+    document.querySelector(`#list-score-${score}`).innerHTML += `<div>${sanitizedName}</div>`;
 }
 
 function createRank(score, rank) {
@@ -73,11 +84,14 @@ function createRank(score, rank) {
 }
 
 function updateRanking(rankings) {
+    if (isConnected()) {
+        console.log(rankings);
+    }
     const rankedScores = getRankedScores(rankings);
     rankingDiv.innerHTML = '';
     rankedScores.forEach((score, index) => (createRank(score, index + 1)));
     Object.keys(rankings).forEach((key) => {
-        if (rankedScores.includes(rankings[key].wins)) {
+        if (rankedScores.includes(rankings[key].win)) {
             addPlayerToRankingList(rankings[key]);
         }
     });
@@ -93,10 +107,16 @@ function adjustButtonColorAndText(event, didWin) {
 }
 
 function updateGameView(playerHand, pcHand, didWin, event) {
-    adjustButtonColorAndText(event, didWin);
+    let didWinTranslated;
+    if (isConnected()) {
+        didWinTranslated = didWinTranslation[didWin];
+    } else {
+        didWinTranslated = didWin;
+    }
+    adjustButtonColorAndText(event, didWinTranslated);
     pcHandDiv.textContent = pcHand;
     const newRow = historyTable.insertRow();
-    newRow.innerHTML = `<td style="color:${colorTable[didWin]}">${resultTable[didWin]}</td><tr><td>${playerHand}</td><td>${pcHand}</td></tr>`;
+    newRow.innerHTML = `<td style="color:${colorTable[didWinTranslated]}">${resultTable[didWin]}</td><tr><td>${playerHand}</td><td>${pcHand}</td></tr>`;
 }
 
 handButtons.forEach((x) => (x.addEventListener('click', (event) => {
@@ -113,7 +133,9 @@ startGameForm.addEventListener(
         pcHandDiv.textContent = '?';
         historyTable.innerHTML = '<tbody><tr><th>Resultat</th><th>Spieler</th><th>Gegner</th></tr></tbody>';
         const playerName = playerNameInput.value;
-        addRankingIfAbsent(playerName);
+        if (!isConnected()) {
+            addRankingIfAbsent(playerName);
+        }
         handSelectorDiv.innerHTML = `<b>${playerName}!</b> Wähle deine Hand!`;
         gamePageDiv.style.display = 'block';
         startPageDiv.style.display = 'none';

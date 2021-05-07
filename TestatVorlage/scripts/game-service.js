@@ -27,7 +27,11 @@ export function isConnected() {
 }
 
 export function getRankings(rankingsCallbackHandlerFn) {
-    setTimeout(() => rankingsCallbackHandlerFn(rankings), DELAY_MS);
+    if (isConnected()) {
+        setTimeout(() => fetch(`${SERVER_URL}/ranking`).then((r) => (r.json()).then((o) => (rankingsCallbackHandlerFn(o)))), DELAY_MS);
+    } else {
+        rankingsCallbackHandlerFn(rankings);
+    }
 }
 
 export function addRankingIfAbsent(user) {
@@ -47,11 +51,19 @@ function determineWinner(playerHand, pcHand) {
 }
 
 export function evaluateHand(playerName, playerHand, event, didWinHandlerCallbackFn) {
-    const pcHand = pickHand();
-    const didWin = determineWinner(playerHand, pcHand);
-    if (didWin === 1) {
-        rankings[playerName].wins += 1;
+    let pcHand;
+    let didWin;
+    if (isConnected()) {
+        fetch(`${SERVER_URL}/play?playerName=${playerName}&playerHand=${playerHand}`)
+            .then((r) => (r.json()))
+            .then((o) => (didWinHandlerCallbackFn(playerHand, o.choice, o.win, event)));
+    } else {
+        pcHand = pickHand();
+        didWin = determineWinner(playerHand, pcHand);
+        if (didWin === 1) {
+            rankings[playerName].win += 1;
+        }
+        didWinHandlerCallbackFn(playerHand, pcHand, didWin, event);
+        localStorage.setItem('rankings', JSON.stringify(rankings));
     }
-    didWinHandlerCallbackFn(playerHand, pcHand, didWin, event);
-    localStorage.setItem('rankings', JSON.stringify(rankings));
 }
