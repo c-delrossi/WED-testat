@@ -19,6 +19,8 @@ const colorTable = {
 let loadingIndicatorIntervalId;
 let numberOfDots = 0;
 
+let playerButton;
+
 const backToStartBtn = document.querySelector('#back-to-start-btn');
 const switchConnectionBtn = document.querySelector('#switch-connection-btn');
 const playerNameInput = document.querySelector('#player-name-input');
@@ -135,19 +137,19 @@ if (localStorage.getItem('rankings') !== null) {
     updateRanking(JSON.parse(localStorage.getItem('rankings')));
 }
 
-function adjustButtonColorAndText(event, didWin) {
-    event.target.textContent = `${resultTable[didWin]} ${event.target.dataset.hand}`;
-    event.target.style.color = colorTable[didWin];
+function adjustButtonColorAndText(didWin) {
+    playerButton.textContent = `${resultTable[didWin]} ${playerButton.dataset.hand}`;
+    playerButton.style.color = colorTable[didWin];
 }
 
-function updateGameView(playerHand, pcHand, didWin, event) {
+function updateGameView(playerHand, pcHand, didWin) {
     let didWinTranslated;
     if (isConnected()) {
         didWinTranslated = didWinTranslation[didWin];
     } else {
         didWinTranslated = didWin;
     }
-    adjustButtonColorAndText(event, didWinTranslated);
+    adjustButtonColorAndText(didWinTranslated);
     pcHandDiv.textContent = pcHand;
     const newRow = historyTable.insertRow();
     newRow.innerHTML = `<td style="color:${colorTable[didWinTranslated]}">${resultTable[didWin]}</td><tr><td>${playerHand}</td><td>${pcHand}</td></tr>`;
@@ -155,8 +157,9 @@ function updateGameView(playerHand, pcHand, didWin, event) {
 
 handButtons.forEach((x) => (x.addEventListener('click', (event) => {
         startCountdown(event);
+        playerButton = event.target;
         const playerHand = event.target.dataset.hand;
-        evaluateHand(playerNameInput.value, playerHand, event, updateGameView);
+        evaluateHand(playerNameInput.value, playerHand, updateGameView);
         getRankings(updateRanking);
     })
 ));

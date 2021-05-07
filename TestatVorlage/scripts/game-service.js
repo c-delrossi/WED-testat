@@ -50,20 +50,20 @@ function determineWinner(playerHand, pcHand) {
     return evaluationTable[playerHand][pcHand];
 }
 
-export function evaluateHand(playerName, playerHand, event, didWinHandlerCallbackFn) {
+export function evaluateHand(playerName, playerHand, didWinHandlerCallbackFn) {
     let pcHand;
     let didWin;
     if (isConnected()) {
         fetch(`${SERVER_URL}/play?playerName=${playerName}&playerHand=${playerHand}`)
             .then((r) => (r.json()))
-            .then((o) => (didWinHandlerCallbackFn(playerHand, o.choice, o.win, event)));
+            .then((o) => (didWinHandlerCallbackFn(playerHand, o.choice, o.win)));
     } else {
         pcHand = pickHand();
         didWin = determineWinner(playerHand, pcHand);
         if (didWin === 1) {
             rankings[playerName].win += 1;
         }
-        didWinHandlerCallbackFn(playerHand, pcHand, didWin, event);
+        didWinHandlerCallbackFn(playerHand, pcHand, didWin);
         localStorage.setItem('rankings', JSON.stringify(rankings));
     }
 }
