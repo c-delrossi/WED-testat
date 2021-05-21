@@ -32,7 +32,7 @@ const countdownDiv = document.querySelector('#countdown-div');
 const gamePageDiv = document.querySelector('#game-page');
 const startPageDiv = document.querySelector('#start-page');
 const handButtons = document.querySelectorAll('.hand-btn');
-const buttons = document.querySelectorAll('button');
+const gamePageButtons = document.querySelectorAll('button.game-page');
 const startGameForm = document.querySelector('#start-game-form');
 const startGameBtn = document.querySelector('#start-game-btn');
 const loadingIndicator = document.querySelector('#loading-div');
@@ -69,8 +69,8 @@ function removeLoadingIndicator() {
     rankingDiv.style.display = 'block';
 }
 
-function switchButtonState() {
-    buttons.forEach((button) => {
+function switchGamePageButtonState() {
+    gamePageButtons.forEach((button) => {
         button.disabled = !button.disabled;
     });
 }
@@ -87,7 +87,7 @@ function countDown(remainingTime) {
         countdownDiv.textContent = 'VS';
         pcHandDiv.textContent = '?';
         resetHandButtons();
-        switchButtonState();
+        switchGamePageButtonState();
     } else {
         countdownDiv.textContent = `Nächste Runde in ${remainingTime}`;
         setTimeout(() => countDown(remainingTime - 1), 1000);
@@ -95,7 +95,7 @@ function countDown(remainingTime) {
 }
 
 function startCountdown() {
-    switchButtonState();
+    switchGamePageButtonState();
     countDown(3);
 }
 
