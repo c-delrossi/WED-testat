@@ -1,4 +1,4 @@
-const DELAY_MS = 1000;
+const DELAY_MS = 1;
 const SERVER_URL = 'https://stone.dev.ifs.hsr.ch';
 
 let rankings;
