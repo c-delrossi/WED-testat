@@ -105,3 +105,11 @@ th,
     display: none;
     margin-left: 49%;
 }
+
+[data-didwin="-1"] {
+    color: red;
+}
+
+[data-didwin="1"] {
+    color: green;
+}

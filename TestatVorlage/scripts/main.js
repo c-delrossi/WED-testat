@@ -10,11 +10,6 @@ const resultTable = {
     '-1': '×',
     1: '✓',
 };
-const colorTable = {
-    0: 'black',
-    1: 'green',
-    '-1': 'red',
-};
 
 let loadingIndicatorIntervalId;
 let numberOfDots = 0;
@@ -77,7 +72,7 @@ function switchGamePageButtonState() {
 
 function resetHandButtons() {
     handButtons.forEach((button) => {
-        button.style.color = 'black';
+        button.dataset.didwin = '0';
         button.textContent = button.dataset.hand;
     });
 }
@@ -142,7 +137,7 @@ if (localStorage.getItem('rankings') !== null) {
 
 function adjustButtonColorAndText(didWin) {
     playerButton.textContent = `${resultTable[didWin]} ${playerButton.dataset.hand}`;
-    playerButton.style.color = colorTable[didWin];
+    playerButton.dataset.didwin = didWin;
 }
 
 function updateGameView(playerHand, pcHand, didWin) {
@@ -155,7 +150,7 @@ function updateGameView(playerHand, pcHand, didWin) {
     adjustButtonColorAndText(didWinTranslated);
     pcHandDiv.textContent = pcHand;
     const newRow = historyTable.insertRow();
-    newRow.innerHTML = `<td style="color:${colorTable[didWinTranslated]}">${resultTable[didWinTranslated]}</td><tr><td>${playerHand}</td><td>${pcHand}</td></tr>`;
+    newRow.innerHTML = `<td data-didwin="${didWinTranslated}">${resultTable[didWinTranslated]}</td><tr><td>${playerHand}</td><td>${pcHand}</td></tr>`;
 }
 
 handButtons.forEach((x) => (x.addEventListener('click', (event) => {
