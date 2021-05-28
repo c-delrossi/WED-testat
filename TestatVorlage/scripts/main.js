@@ -131,9 +131,7 @@ function updateRanking(rankings) {
     });
 }
 
-if (localStorage.getItem('rankings') !== null) {
-    updateRanking(JSON.parse(localStorage.getItem('rankings')));
-}
+getRankings(updateRanking);
 
 function adjustButtonColorAndText(didWin) {
     playerButton.textContent = `${resultTable[didWin]} ${playerButton.dataset.hand}`;
